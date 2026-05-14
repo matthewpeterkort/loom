@@ -1,0 +1,180 @@
+{
+  "mappings": [
+    {
+      "graph": "demo_graph",
+      "display_name": "demo graph",
+      "bound_schema": "master",
+      "manifest": {
+        "version": 1,
+        "graph": "demo_graph",
+        "display_name": "demo graph",
+        "sources": {
+          "gs_0000_patients_primary": {
+            "source": "patients",
+            "path": null,
+            "format": "tsv"
+          },
+          "gs_0001_samples_primary": {
+            "source": "samples",
+            "path": null,
+            "format": "tsv"
+          }
+        },
+        "vertices": [
+          {
+            "source": "gs_0000_patients_primary",
+            "label": "Patient",
+            "id": {
+              "concat": [
+                "Patient/",
+                {
+                  "column": "PATIENT_ID"
+                }
+              ]
+            },
+            "where": null,
+            "columns": {},
+            "props": "none",
+            "prop_types": {}
+          },
+          {
+            "source": "gs_0001_samples_primary",
+            "label": "Specimen",
+            "id": {
+              "concat": [
+                "Specimen/",
+                {
+                  "column": "SAMPLE_ID"
+                }
+              ]
+            },
+            "where": null,
+            "columns": {
+              "identifier": {
+                "column": "SAMPLE_ID"
+              }
+            },
+            "props": "none",
+            "prop_types": {}
+          }
+        ],
+        "edges": [
+          {
+            "source": "gs_0001_samples_primary",
+            "label": "subject_Patient",
+            "from_label": "Specimen",
+            "to_label": "Patient",
+            "from": {
+              "concat": [
+                "Specimen/",
+                {
+                  "column": "SAMPLE_ID"
+                }
+              ]
+            },
+            "to": {
+              "concat": [
+                "Patient/",
+                {
+                  "column": "PATIENT_ID"
+                }
+              ]
+            },
+            "id": null,
+            "where": null,
+            "columns": {},
+            "props": "none",
+            "prop_types": {}
+          }
+        ],
+        "validation": {
+          "duplicate_vertex_ids": "error",
+          "duplicate_edge_ids": "error",
+          "missing_edge_endpoints": "error",
+          "empty_ids": "error",
+          "type_coercion": "strict",
+          "duplicate_alias_keys": "error",
+          "unresolved_references": "warn",
+          "ambiguous_references": "error"
+        },
+        "identity": {},
+        "references": [],
+        "metadata": {}
+      },
+      "source_dependencies": [
+        "patients",
+        "samples"
+      ],
+      "status": "registered",
+      "virtual_binding": {
+        "graph": "demo_graph",
+        "vertex_table": "vertices_demo_graph",
+        "edge_table": "edges_demo_graph",
+        "node_view_names": [
+          "graph_demo_graph_node_0000_patient",
+          "graph_demo_graph_node_0001_specimen"
+        ],
+        "edge_view_names": [
+          "graph_demo_graph_edge_0000_subject_patient"
+        ],
+        "identity_view_names": [
+          "graph_demo_graph_identity_patient",
+          "graph_demo_graph_identity_specimen"
+        ],
+        "reference_view_names": [],
+        "source_dependencies": [
+          "patients",
+          "samples"
+        ],
+        "source_fingerprints": {
+          "patients": "d856346fd49faf9e",
+          "samples": "f90c7dd1990c8ecc"
+        },
+        "registered_unix_seconds": 1778795738
+      },
+      "identity_summary": {
+        "labels": [
+          {
+            "label": "Patient",
+            "view_name": "graph_demo_graph_identity_patient",
+            "alias_names": [
+              "canonical"
+            ]
+          },
+          {
+            "label": "Specimen",
+            "view_name": "graph_demo_graph_identity_specimen",
+            "alias_names": [
+              "canonical"
+            ]
+          }
+        ],
+        "references": [],
+        "duplicate_alias_keys": {},
+        "unresolved_references": {},
+        "ambiguous_references": {}
+      },
+      "last_report": {
+        "vertices": 0,
+        "edges": 0,
+        "vertex_plans": 2,
+        "edge_plans": 1,
+        "vertex_labels": {},
+        "edge_labels": {},
+        "filtered_vertex_rows": 0,
+        "filtered_edge_rows": 0,
+        "duplicate_vertices": 0,
+        "duplicate_edges": 0,
+        "unresolved_edge_endpoints": 0,
+        "coercion_failures": 0,
+        "provenance_missing": 0,
+        "vertices_uri": null,
+        "edges_uri": null,
+        "warnings": []
+      },
+      "last_error": null,
+      "created_unix_seconds": 1778795738,
+      "updated_unix_seconds": 1778795738
+    }
+  ]
+}

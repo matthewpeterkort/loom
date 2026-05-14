@@ -1,0 +1,29 @@
+[package]
+name = "loom-engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = "1.0"
+arrow.workspace = true
+arrow-json.workspace = true
+async-trait = "0.1.89"
+datafusion.workspace = true
+futures = "0.3.32"
+parquet.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sonic-rs = "0.5.7"
+tokio.workspace = true
+vortex.workspace = true
+vortex-datafusion.workspace = true
+jsonschema.workspace = true
+rayon = "1.11.0"
+sha2 = "0.10"
+calamine = "0.34"
+
+[dev-dependencies]
+anyhow = "1.0"
+tempfile.workspace = true
+rust_xlsxwriter = "0.82"

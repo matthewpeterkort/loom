@@ -1,0 +1,6 @@
+.git
+target
+.DS_Store
+**/.DS_Store
+*.log
+loom-server/data

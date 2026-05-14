@@ -1,0 +1,22 @@
+[package]
+name = "loom-server"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+arrow.workspace = true
+arrow-flight.workspace = true
+arrow-json.workspace = true
+axum.workspace = true
+futures = "0.3"
+flexbuffers = "2"
+loom-engine = { path = "../loom-engine" }
+jsonschema = { version = "0.45.0", default-features = false }
+parquet.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tempfile.workspace = true
+tokio.workspace = true
+tonic.workspace = true

@@ -1,0 +1,8 @@
+#Patient Identifier	Sample Identifier	Cancer Type Detailed	Sample Type	Custom Batch
+#Patient identifier	Sample Identifier	Subtype description	Sample type	Custom study-specific field
+#STRING	STRING	STRING	STRING	STRING
+#1	1	1	1	1
+PATIENT_ID	SAMPLE_ID	CANCER_TYPE_DETAILED	SAMPLE_TYPE	CUSTOM_BATCH
+TCGA-A1-A0SB	TCGA-A1-A0SB-01	Breast Invasive Ductal Carcinoma	Primary	B1
+TCGA-A1-A0SB	TCGA-A1-A0SB-02	Breast Invasive Ductal Carcinoma	Metastatic	B2
+TCGA-A2-A04P	TCGA-A2-A04P-01	Breast Invasive Lobular Carcinoma	Primary	B1

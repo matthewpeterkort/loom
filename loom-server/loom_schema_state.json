@@ -1,0 +1,179 @@
+{
+  "schemas": {
+    "master": {
+      "doc": {
+        "$defs": {
+          "Patient": {
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "Specimen": {
+            "links": [
+              {
+                "rel": "subject_Patient",
+                "targetSchema": {
+                  "$ref": "#/$defs/Patient"
+                }
+              }
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "identifier": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "summary": {
+        "name": "master",
+        "schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+        "schema_id": null,
+        "defs_count": 2,
+        "resource_types": 2,
+        "link_relations": 1,
+        "has_hypermedia_links": true,
+        "compiled_resource_shapes": 2,
+        "compiled_entity_types": 2,
+        "compiled_properties": 3,
+        "compiled_links": 1,
+        "wildcard_links": 0,
+        "created_unix_seconds": 1778795738
+      },
+      "arrow_shapes": [
+        {
+          "resource_type": "Patient",
+          "fields": [
+            {
+              "name": "id",
+              "data_type": "utf8",
+              "nullable": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "resource_type": "Specimen",
+          "fields": [
+            {
+              "name": "id",
+              "data_type": "utf8",
+              "nullable": true,
+              "children": []
+            },
+            {
+              "name": "identifier",
+              "data_type": "utf8",
+              "nullable": true,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "promoted_columns": [
+        {
+          "resource_type": "Specimen",
+          "field_name": "identifier",
+          "column_name": "t_specimen_identifier",
+          "kind": "Utf8"
+        }
+      ],
+      "graph_schema": {
+        "descriptor": {
+          "schema_id": null,
+          "dialect": "https://json-schema.org/draft/2020-12/schema",
+          "entity_type_count": 2,
+          "property_count": 3,
+          "link_count": 1,
+          "wildcard_link_count": 0
+        },
+        "entities": {
+          "Patient": {
+            "name": "Patient",
+            "required": [],
+            "properties": {
+              "id": {
+                "name": "id",
+                "kind": "scalar",
+                "required": false,
+                "json_types": [
+                  "string"
+                ],
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "links": []
+          },
+          "Specimen": {
+            "name": "Specimen",
+            "required": [],
+            "properties": {
+              "id": {
+                "name": "id",
+                "kind": "scalar",
+                "required": false,
+                "json_types": [
+                  "string"
+                ],
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "identifier": {
+                "name": "identifier",
+                "kind": "scalar",
+                "required": false,
+                "json_types": [
+                  "string"
+                ],
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "links": [
+              {
+                "rel": "subject_Patient",
+                "target_entity": "Patient",
+                "wildcard_target": false,
+                "template": {
+                  "pointers": {},
+                  "required": []
+                },
+                "target_hints": {
+                  "backref": [],
+                  "direction": [],
+                  "multiplicity": [],
+                  "regex_match": [],
+                  "extensions": {}
+                },
+                "extensions": {},
+                "schema": {
+                  "rel": "subject_Patient",
+                  "targetSchema": {
+                    "$ref": "#/$defs/Patient"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "warnings": []
+      },
+      "compile_warnings": []
+    }
+  },
+  "graph_schema_bindings": {
+    "demo_graph": "master"
+  }
+}

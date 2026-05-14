@@ -1,0 +1,51 @@
+[workspace]
+members = [
+  "loom-engine",
+  "loom-server",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+version = "0.1.0"
+
+[workspace.dependencies]
+anyhow = "1"
+arrow = "57"
+arrow-flight = "57"
+arrow-json = "57"
+axum = "0.8"
+datafusion = "52"
+vortex = { version = "0.63", features = ["files"] }
+vortex-datafusion = "0.63"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs"] }
+tonic = { version = "0.14", features = ["transport"] }
+parquet = "57"
+jsonschema = "0.28"
+tempfile = "3"
+
+[patch.crates-io]
+custom-labels = { path = "vendor/custom-labels" }
+
+# ── Build profiles ────────────────────────────────────────────────────────────
+
+[profile.release]
+opt-level = 3
+lto = "thin"           # cross-crate inlining without full LTO overhead
+codegen-units = 1      # max optimization at the cost of compile time
+
+# sonic_rs and Arrow require native SIMD (NEON on Apple Silicon, AVX2 on x86)
+# to unlock their SIMD-accelerated paths.
+[profile.release.build-override]
+opt-level = 3
+
+# Propagate native-cpu to the release profile via RUSTFLAGS.
+# Set in .cargo/config.toml below — see comment there.
+
+[profile.bench]
+opt-level = 3
+inherits = "release"

@@ -1,0 +1,1613 @@
+{
+  "schemas": [
+    {
+      "id": "demo_schema",
+      "graph": "demo_graph",
+      "display_name": "demo graph",
+      "bound_schema": "master",
+      "spec": {
+        "version": 1,
+        "id": "demo_schema",
+        "graph": "demo_graph",
+        "display_name": "demo graph",
+        "bound_schema": "master",
+        "nodes": [
+          {
+            "source": {
+              "source_id": "patients",
+              "table_id": "primary"
+            },
+            "label": "Patient",
+            "id": {
+              "concat": [
+                "Patient/",
+                {
+                  "column": "PATIENT_ID"
+                }
+              ]
+            },
+            "where": null,
+            "columns": {},
+            "props": "none",
+            "prop_types": {},
+            "schema_entity": "Patient"
+          },
+          {
+            "source": {
+              "source_id": "samples",
+              "table_id": "primary"
+            },
+            "label": "Specimen",
+            "id": {
+              "concat": [
+                "Specimen/",
+                {
+                  "column": "SAMPLE_ID"
+                }
+              ]
+            },
+            "where": null,
+            "columns": {
+              "identifier": {
+                "column": "SAMPLE_ID"
+              }
+            },
+            "props": "none",
+            "prop_types": {},
+            "schema_entity": "Specimen"
+          }
+        ],
+        "edges": [
+          {
+            "source": {
+              "source_id": "samples",
+              "table_id": "primary"
+            },
+            "label": "subject_Patient",
+            "from_label": "Specimen",
+            "to_label": "Patient",
+            "from": {
+              "concat": [
+                "Specimen/",
+                {
+                  "column": "SAMPLE_ID"
+                }
+              ]
+            },
+            "to": {
+              "concat": [
+                "Patient/",
+                {
+                  "column": "PATIENT_ID"
+                }
+              ]
+            },
+            "id": null,
+            "where": null,
+            "columns": {},
+            "props": "none",
+            "prop_types": {},
+            "schema_relation": "subject_Patient"
+          }
+        ],
+        "metadata": {}
+      },
+      "compiled_manifest": {
+        "version": 1,
+        "graph": "demo_graph",
+        "display_name": "demo graph",
+        "sources": {
+          "gs_0000_patients_primary": {
+            "source": "patients",
+            "path": null,
+            "format": "tsv"
+          },
+          "gs_0001_samples_primary": {
+            "source": "samples",
+            "path": null,
+            "format": "tsv"
+          }
+        },
+        "vertices": [
+          {
+            "source": "gs_0000_patients_primary",
+            "label": "Patient",
+            "id": {
+              "concat": [
+                "Patient/",
+                {
+                  "column": "PATIENT_ID"
+                }
+              ]
+            },
+            "where": null,
+            "columns": {},
+            "props": "none",
+            "prop_types": {}
+          },
+          {
+            "source": "gs_0001_samples_primary",
+            "label": "Specimen",
+            "id": {
+              "concat": [
+                "Specimen/",
+                {
+                  "column": "SAMPLE_ID"
+                }
+              ]
+            },
+            "where": null,
+            "columns": {
+              "identifier": {
+                "column": "SAMPLE_ID"
+              }
+            },
+            "props": "none",
+            "prop_types": {}
+          }
+        ],
+        "edges": [
+          {
+            "source": "gs_0001_samples_primary",
+            "label": "subject_Patient",
+            "from_label": "Specimen",
+            "to_label": "Patient",
+            "from": {
+              "concat": [
+                "Specimen/",
+                {
+                  "column": "SAMPLE_ID"
+                }
+              ]
+            },
+            "to": {
+              "concat": [
+                "Patient/",
+                {
+                  "column": "PATIENT_ID"
+                }
+              ]
+            },
+            "id": null,
+            "where": null,
+            "columns": {},
+            "props": "none",
+            "prop_types": {}
+          }
+        ],
+        "validation": {
+          "duplicate_vertex_ids": "error",
+          "duplicate_edge_ids": "error",
+          "missing_edge_endpoints": "error",
+          "empty_ids": "error",
+          "type_coercion": "strict",
+          "duplicate_alias_keys": "error",
+          "unresolved_references": "warn",
+          "ambiguous_references": "error"
+        },
+        "identity": {},
+        "references": [],
+        "metadata": {}
+      },
+      "status": "registered",
+      "last_validation": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "source_hints": [
+          {
+            "source": {
+              "source_id": "patients",
+              "table_id": "primary"
+            },
+            "table_name": "source_patients",
+            "columns": [
+              "PATIENT_ID",
+              "MRN"
+            ],
+            "possible_id_columns": [
+              "PATIENT_ID",
+              "MRN"
+            ],
+            "semantic_suggestions": [
+              {
+                "column": "PATIENT_ID",
+                "suggested_mapping": "Patient.id",
+                "confidence": 0.99,
+                "reason": "column shape and name are compatible with Patient.id (Identifier)"
+              },
+              {
+                "column": "PATIENT_ID",
+                "suggested_mapping": "Specimen.id",
+                "confidence": 0.8365,
+                "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+              },
+              {
+                "column": "MRN",
+                "suggested_mapping": "Patient.id",
+                "confidence": 0.48400000000000004,
+                "reason": "column shape and name are compatible with Patient.id (Identifier)"
+              },
+              {
+                "column": "MRN",
+                "suggested_mapping": "Specimen.id",
+                "confidence": 0.48400000000000004,
+                "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+              }
+            ],
+            "likely_id_columns": [
+              "PATIENT_ID",
+              "MRN"
+            ],
+            "likely_reference_columns": [
+              "PATIENT_ID"
+            ],
+            "column_profiles": [
+              {
+                "column": "PATIENT_ID",
+                "non_empty_count": 2,
+                "distinct_count": 2,
+                "uniqueness_ratio": 1.0,
+                "inferred_type": "string",
+                "sample_values": [
+                  "p1",
+                  "p2"
+                ],
+                "likely_id": true,
+                "likely_foreign_key": true,
+                "semantic_roles": [
+                  "Patient.id",
+                  "Specimen.id",
+                  "Specimen.identifier"
+                ],
+                "observed_shape": {
+                  "null_ratio": 0.0,
+                  "parseable_integer_ratio": 0.0,
+                  "parseable_decimal_ratio": 0.0,
+                  "parseable_boolean_ratio": 0.0,
+                  "parseable_date_ratio": 0.0,
+                  "parseable_datetime_ratio": 0.0,
+                  "identifier_like": true,
+                  "short_code_like": false,
+                  "long_text_like": false,
+                  "normalized_sample_values": [
+                    "p1",
+                    "p2"
+                  ]
+                },
+                "datatype_candidates": [
+                  {
+                    "family": "identifier",
+                    "confidence": 0.93,
+                    "reason": "high uniqueness and identifier-like token shape"
+                  },
+                  {
+                    "family": "reference",
+                    "confidence": 0.78,
+                    "reason": "column name suggests a row-to-row reference"
+                  }
+                ],
+                "property_matches": [
+                  {
+                    "entity": "Patient",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.99,
+                    "reason": "column shape and name are compatible with Patient.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "identifier",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.identifier (Identifier)"
+                  }
+                ]
+              },
+              {
+                "column": "MRN",
+                "non_empty_count": 2,
+                "distinct_count": 2,
+                "uniqueness_ratio": 1.0,
+                "inferred_type": "string",
+                "sample_values": [
+                  "M1",
+                  "M2"
+                ],
+                "likely_id": true,
+                "likely_foreign_key": false,
+                "semantic_roles": [
+                  "Patient.id",
+                  "Specimen.id",
+                  "Specimen.identifier"
+                ],
+                "observed_shape": {
+                  "null_ratio": 0.0,
+                  "parseable_integer_ratio": 0.0,
+                  "parseable_decimal_ratio": 0.0,
+                  "parseable_boolean_ratio": 0.0,
+                  "parseable_date_ratio": 0.0,
+                  "parseable_datetime_ratio": 0.0,
+                  "identifier_like": true,
+                  "short_code_like": false,
+                  "long_text_like": false,
+                  "normalized_sample_values": [
+                    "m1",
+                    "m2"
+                  ]
+                },
+                "datatype_candidates": [
+                  {
+                    "family": "string",
+                    "confidence": 0.6,
+                    "reason": "fallback inferred from primitive source type"
+                  }
+                ],
+                "property_matches": [
+                  {
+                    "entity": "Patient",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.48400000000000004,
+                    "reason": "column shape and name are compatible with Patient.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.48400000000000004,
+                    "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "identifier",
+                    "family": "identifier",
+                    "confidence": 0.48400000000000004,
+                    "reason": "column shape and name are compatible with Specimen.identifier (Identifier)"
+                  }
+                ]
+              }
+            ],
+            "clusters": [],
+            "entity_candidates": [
+              {
+                "entity": "Patient",
+                "confidence": 0.7051666666666666,
+                "reason": "table columns cover 1 schema properties for entity `Patient`",
+                "matched_properties": [
+                  "id"
+                ],
+                "evidence": [
+                  "id:0.99"
+                ]
+              },
+              {
+                "entity": "Specimen",
+                "confidence": 0.6470583333333334,
+                "reason": "table columns cover 2 schema properties for entity `Specimen`",
+                "matched_properties": [
+                  "id",
+                  "identifier"
+                ],
+                "evidence": [
+                  "id:0.84",
+                  "identifier:0.84"
+                ]
+              }
+            ],
+            "edge_candidates": [
+              {
+                "rel": "subject_Patient",
+                "from_entity": "Specimen",
+                "to_entity": "Patient",
+                "source_column": "PATIENT_ID",
+                "confidence": 0.6082350000000001,
+                "reason": "column `PATIENT_ID` looks like a `Patient` reference compatible with schema link `subject_Patient`",
+                "evidence": [
+                  "link_tokens=patient,specimen,subject"
+                ]
+              }
+            ],
+            "schema_derived": true
+          },
+          {
+            "source": {
+              "source_id": "samples",
+              "table_id": "primary"
+            },
+            "table_name": "source_samples",
+            "columns": [
+              "SAMPLE_ID",
+              "PATIENT_ID"
+            ],
+            "possible_id_columns": [
+              "SAMPLE_ID",
+              "PATIENT_ID"
+            ],
+            "semantic_suggestions": [
+              {
+                "column": "PATIENT_ID",
+                "suggested_mapping": "Patient.id",
+                "confidence": 0.99,
+                "reason": "column shape and name are compatible with Patient.id (Identifier)"
+              },
+              {
+                "column": "SAMPLE_ID",
+                "suggested_mapping": "Patient.id",
+                "confidence": 0.8365,
+                "reason": "column shape and name are compatible with Patient.id (Identifier)"
+              },
+              {
+                "column": "SAMPLE_ID",
+                "suggested_mapping": "Specimen.id",
+                "confidence": 0.8365,
+                "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+              },
+              {
+                "column": "PATIENT_ID",
+                "suggested_mapping": "Specimen.id",
+                "confidence": 0.8365,
+                "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+              }
+            ],
+            "likely_id_columns": [
+              "SAMPLE_ID",
+              "PATIENT_ID"
+            ],
+            "likely_reference_columns": [
+              "SAMPLE_ID",
+              "PATIENT_ID"
+            ],
+            "column_profiles": [
+              {
+                "column": "SAMPLE_ID",
+                "non_empty_count": 2,
+                "distinct_count": 2,
+                "uniqueness_ratio": 1.0,
+                "inferred_type": "string",
+                "sample_values": [
+                  "s1",
+                  "s2"
+                ],
+                "likely_id": true,
+                "likely_foreign_key": true,
+                "semantic_roles": [
+                  "Patient.id",
+                  "Specimen.id",
+                  "Specimen.identifier"
+                ],
+                "observed_shape": {
+                  "null_ratio": 0.0,
+                  "parseable_integer_ratio": 0.0,
+                  "parseable_decimal_ratio": 0.0,
+                  "parseable_boolean_ratio": 0.0,
+                  "parseable_date_ratio": 0.0,
+                  "parseable_datetime_ratio": 0.0,
+                  "identifier_like": true,
+                  "short_code_like": false,
+                  "long_text_like": false,
+                  "normalized_sample_values": [
+                    "s1",
+                    "s2"
+                  ]
+                },
+                "datatype_candidates": [
+                  {
+                    "family": "identifier",
+                    "confidence": 0.93,
+                    "reason": "high uniqueness and identifier-like token shape"
+                  },
+                  {
+                    "family": "reference",
+                    "confidence": 0.78,
+                    "reason": "column name suggests a row-to-row reference"
+                  }
+                ],
+                "property_matches": [
+                  {
+                    "entity": "Patient",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Patient.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "identifier",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.identifier (Identifier)"
+                  }
+                ]
+              },
+              {
+                "column": "PATIENT_ID",
+                "non_empty_count": 2,
+                "distinct_count": 2,
+                "uniqueness_ratio": 1.0,
+                "inferred_type": "string",
+                "sample_values": [
+                  "p1",
+                  "p2"
+                ],
+                "likely_id": true,
+                "likely_foreign_key": true,
+                "semantic_roles": [
+                  "Patient.id",
+                  "Specimen.id",
+                  "Specimen.identifier"
+                ],
+                "observed_shape": {
+                  "null_ratio": 0.0,
+                  "parseable_integer_ratio": 0.0,
+                  "parseable_decimal_ratio": 0.0,
+                  "parseable_boolean_ratio": 0.0,
+                  "parseable_date_ratio": 0.0,
+                  "parseable_datetime_ratio": 0.0,
+                  "identifier_like": true,
+                  "short_code_like": false,
+                  "long_text_like": false,
+                  "normalized_sample_values": [
+                    "p1",
+                    "p2"
+                  ]
+                },
+                "datatype_candidates": [
+                  {
+                    "family": "identifier",
+                    "confidence": 0.93,
+                    "reason": "high uniqueness and identifier-like token shape"
+                  },
+                  {
+                    "family": "reference",
+                    "confidence": 0.78,
+                    "reason": "column name suggests a row-to-row reference"
+                  }
+                ],
+                "property_matches": [
+                  {
+                    "entity": "Patient",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.99,
+                    "reason": "column shape and name are compatible with Patient.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "identifier",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.identifier (Identifier)"
+                  }
+                ]
+              }
+            ],
+            "clusters": [],
+            "entity_candidates": [
+              {
+                "entity": "Patient",
+                "confidence": 0.7051666666666666,
+                "reason": "table columns cover 1 schema properties for entity `Patient`",
+                "matched_properties": [
+                  "id"
+                ],
+                "evidence": [
+                  "id:0.99"
+                ]
+              },
+              {
+                "entity": "Specimen",
+                "confidence": 0.6470583333333334,
+                "reason": "table columns cover 2 schema properties for entity `Specimen`",
+                "matched_properties": [
+                  "id",
+                  "identifier"
+                ],
+                "evidence": [
+                  "id:0.84",
+                  "identifier:0.84"
+                ]
+              }
+            ],
+            "edge_candidates": [
+              {
+                "rel": "subject_Patient",
+                "from_entity": "Specimen",
+                "to_entity": "Patient",
+                "source_column": "PATIENT_ID",
+                "confidence": 0.6082350000000001,
+                "reason": "column `PATIENT_ID` looks like a `Patient` reference compatible with schema link `subject_Patient`",
+                "evidence": [
+                  "link_tokens=patient,specimen,subject"
+                ]
+              }
+            ],
+            "schema_derived": true
+          }
+        ],
+        "mapping_validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "policy": {
+            "duplicate_vertex_ids": "error",
+            "duplicate_edge_ids": "error",
+            "missing_edge_endpoints": "error",
+            "empty_ids": "error",
+            "type_coercion": "strict",
+            "duplicate_alias_keys": "error",
+            "unresolved_references": "warn",
+            "ambiguous_references": "error"
+          },
+          "metrics": {
+            "input_rows": {
+              "edges[0]": 2,
+              "vertices[0]": 2,
+              "vertices[1]": 2
+            },
+            "emitted_rows": {
+              "edges[0]": 2,
+              "vertices[0]": 2,
+              "vertices[1]": 2
+            },
+            "filtered_empty_ids": 0,
+            "duplicate_vertex_ids": 0,
+            "duplicate_edge_ids": 0,
+            "duplicate_alias_keys": {},
+            "unresolved_edge_endpoints": 0,
+            "unresolved_edge_endpoint_counts": {},
+            "unresolved_references": {},
+            "ambiguous_references": {},
+            "coercion_failures": {},
+            "provenance_missing": 0,
+            "missing_required_fields": {}
+          },
+          "plan_preview": {
+            "graph": "demo_graph",
+            "vertex_table": "vertices_demo_graph",
+            "edge_table": "edges_demo_graph",
+            "vertex_columns": [
+              "id",
+              "label",
+              "source_id",
+              "source_row",
+              "payload_codec",
+              "payload_bin",
+              "payload_json_bin",
+              "identifier"
+            ],
+            "edge_columns": [
+              "id",
+              "from_id",
+              "to_id",
+              "label",
+              "source_id",
+              "source_row",
+              "payload_codec",
+              "payload_bin",
+              "payload_json_bin"
+            ],
+            "node_views": [
+              {
+                "mapping_index": 0,
+                "mapping_path": "vertices[0]",
+                "source_alias": "gs_0000_patients_primary",
+                "source_id": "patients",
+                "source_table_name": "source_patients",
+                "source_table_ref": {
+                  "source_id": "patients",
+                  "table_id": "primary"
+                },
+                "view_name": "graph_demo_graph_node_0000_patient",
+                "label": "Patient",
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"Patient\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"patients\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_patients\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"MRN\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"id\", data_type: Utf8, nullable: true }, Field { name: \"label\", data_type: Utf8 }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "id",
+                  "label",
+                  "source_id",
+                  "source_row"
+                ]
+              },
+              {
+                "mapping_index": 1,
+                "mapping_path": "vertices[1]",
+                "source_alias": "gs_0001_samples_primary",
+                "source_id": "samples",
+                "source_table_name": "source_samples",
+                "source_table_ref": {
+                  "source_id": "samples",
+                  "table_id": "primary"
+                },
+                "view_name": "graph_demo_graph_node_0001_specimen",
+                "label": "Specimen",
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"Specimen\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"samples\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), relation: None, name: \"identifier\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_samples\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"SAMPLE_ID\", data_type: Utf8, nullable: true }, Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"id\", data_type: Utf8, nullable: true }, Field { name: \"label\", data_type: Utf8 }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }, Field { name: \"identifier\", data_type: Utf8, nullable: true }], metadata: {} }, field_qualifiers: [None, None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "id",
+                  "label",
+                  "source_id",
+                  "source_row",
+                  "identifier"
+                ]
+              }
+            ],
+            "edge_views": [
+              {
+                "mapping_index": 0,
+                "mapping_path": "edges[0]",
+                "source_alias": "gs_0001_samples_primary",
+                "source_id": "samples",
+                "source_table_name": "source_samples",
+                "source_table_ref": {
+                  "source_id": "samples",
+                  "table_id": "primary"
+                },
+                "view_name": "graph_demo_graph_edge_0000_subject_patient",
+                "label": "subject_Patient",
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"edge/subject_Patient\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"__source_row\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"id\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"from_id\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"to_id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"subject_Patient\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"samples\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), op: And, right: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_samples\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"SAMPLE_ID\", data_type: Utf8, nullable: true }, Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"id\", data_type: Utf8, nullable: true }, Field { name: \"from_id\", data_type: Utf8, nullable: true }, Field { name: \"to_id\", data_type: Utf8, nullable: true }, Field { name: \"label\", data_type: Utf8 }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [None, None, None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "id",
+                  "from_id",
+                  "to_id",
+                  "label",
+                  "source_id",
+                  "source_row"
+                ]
+              }
+            ],
+            "identity_views": [
+              {
+                "label": "Patient",
+                "view_name": "graph_demo_graph_identity_patient",
+                "alias_names": [
+                  "canonical"
+                ],
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: Literal(Utf8(\"Patient\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"canonical_id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"canonical\"), None), relation: None, name: \"alias_name\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"alias_key\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"patients\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"\"), None), relation: None, name: \"transform_id\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_patients\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"MRN\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"label\", data_type: Utf8 }, Field { name: \"canonical_id\", data_type: Utf8, nullable: true }, Field { name: \"alias_name\", data_type: Utf8 }, Field { name: \"alias_key\", data_type: Utf8, nullable: true }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }, Field { name: \"transform_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [None, None, None, None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "label",
+                  "canonical_id",
+                  "alias_name",
+                  "alias_key",
+                  "source_id",
+                  "source_row",
+                  "transform_id"
+                ]
+              },
+              {
+                "label": "Specimen",
+                "view_name": "graph_demo_graph_identity_specimen",
+                "alias_names": [
+                  "canonical"
+                ],
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: Literal(Utf8(\"Specimen\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"canonical_id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"canonical\"), None), relation: None, name: \"alias_name\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"alias_key\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"samples\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"\"), None), relation: None, name: \"transform_id\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_samples\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"SAMPLE_ID\", data_type: Utf8, nullable: true }, Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"label\", data_type: Utf8 }, Field { name: \"canonical_id\", data_type: Utf8, nullable: true }, Field { name: \"alias_name\", data_type: Utf8 }, Field { name: \"alias_key\", data_type: Utf8, nullable: true }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }, Field { name: \"transform_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [None, None, None, None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "label",
+                  "canonical_id",
+                  "alias_name",
+                  "alias_key",
+                  "source_id",
+                  "source_row",
+                  "transform_id"
+                ]
+              }
+            ],
+            "reference_views": [],
+            "source_dependencies": [
+              "patients",
+              "samples"
+            ],
+            "warnings": []
+          }
+        }
+      },
+      "last_preview": {
+        "graph": "demo_graph",
+        "node_counts": {
+          "Patient": 2,
+          "Specimen": 2
+        },
+        "edge_counts": {
+          "subject_Patient": 2
+        },
+        "sample_node_rows": {
+          "Patient": [
+            {
+              "id": "Patient/p1",
+              "label": "Patient",
+              "source_id": "patients",
+              "source_row": "2"
+            },
+            {
+              "id": "Patient/p2",
+              "label": "Patient",
+              "source_id": "patients",
+              "source_row": "3"
+            }
+          ],
+          "Specimen": [
+            {
+              "id": "Specimen/s1",
+              "identifier": "s1",
+              "label": "Specimen",
+              "source_id": "samples",
+              "source_row": "2"
+            },
+            {
+              "id": "Specimen/s2",
+              "identifier": "s2",
+              "label": "Specimen",
+              "source_id": "samples",
+              "source_row": "3"
+            }
+          ]
+        },
+        "sample_edge_rows": {
+          "subject_Patient": [
+            {
+              "from_id": "Specimen/s1",
+              "id": "edge/subject_Patient/Specimen/s1/Patient/p1/2",
+              "label": "subject_Patient",
+              "source_id": "samples",
+              "source_row": "2",
+              "to_id": "Patient/p1"
+            },
+            {
+              "from_id": "Specimen/s2",
+              "id": "edge/subject_Patient/Specimen/s2/Patient/p2/3",
+              "label": "subject_Patient",
+              "source_id": "samples",
+              "source_row": "3",
+              "to_id": "Patient/p2"
+            }
+          ]
+        },
+        "warnings": [],
+        "source_hints": [
+          {
+            "source": {
+              "source_id": "patients",
+              "table_id": "primary"
+            },
+            "table_name": "source_patients",
+            "columns": [
+              "PATIENT_ID",
+              "MRN"
+            ],
+            "possible_id_columns": [
+              "PATIENT_ID",
+              "MRN"
+            ],
+            "semantic_suggestions": [
+              {
+                "column": "PATIENT_ID",
+                "suggested_mapping": "Patient.id",
+                "confidence": 0.99,
+                "reason": "column shape and name are compatible with Patient.id (Identifier)"
+              },
+              {
+                "column": "PATIENT_ID",
+                "suggested_mapping": "Specimen.id",
+                "confidence": 0.8365,
+                "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+              },
+              {
+                "column": "MRN",
+                "suggested_mapping": "Patient.id",
+                "confidence": 0.48400000000000004,
+                "reason": "column shape and name are compatible with Patient.id (Identifier)"
+              },
+              {
+                "column": "MRN",
+                "suggested_mapping": "Specimen.id",
+                "confidence": 0.48400000000000004,
+                "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+              }
+            ],
+            "likely_id_columns": [
+              "PATIENT_ID",
+              "MRN"
+            ],
+            "likely_reference_columns": [
+              "PATIENT_ID"
+            ],
+            "column_profiles": [
+              {
+                "column": "PATIENT_ID",
+                "non_empty_count": 2,
+                "distinct_count": 2,
+                "uniqueness_ratio": 1.0,
+                "inferred_type": "string",
+                "sample_values": [
+                  "p1",
+                  "p2"
+                ],
+                "likely_id": true,
+                "likely_foreign_key": true,
+                "semantic_roles": [
+                  "Patient.id",
+                  "Specimen.id",
+                  "Specimen.identifier"
+                ],
+                "observed_shape": {
+                  "null_ratio": 0.0,
+                  "parseable_integer_ratio": 0.0,
+                  "parseable_decimal_ratio": 0.0,
+                  "parseable_boolean_ratio": 0.0,
+                  "parseable_date_ratio": 0.0,
+                  "parseable_datetime_ratio": 0.0,
+                  "identifier_like": true,
+                  "short_code_like": false,
+                  "long_text_like": false,
+                  "normalized_sample_values": [
+                    "p1",
+                    "p2"
+                  ]
+                },
+                "datatype_candidates": [
+                  {
+                    "family": "identifier",
+                    "confidence": 0.93,
+                    "reason": "high uniqueness and identifier-like token shape"
+                  },
+                  {
+                    "family": "reference",
+                    "confidence": 0.78,
+                    "reason": "column name suggests a row-to-row reference"
+                  }
+                ],
+                "property_matches": [
+                  {
+                    "entity": "Patient",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.99,
+                    "reason": "column shape and name are compatible with Patient.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "identifier",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.identifier (Identifier)"
+                  }
+                ]
+              },
+              {
+                "column": "MRN",
+                "non_empty_count": 2,
+                "distinct_count": 2,
+                "uniqueness_ratio": 1.0,
+                "inferred_type": "string",
+                "sample_values": [
+                  "M1",
+                  "M2"
+                ],
+                "likely_id": true,
+                "likely_foreign_key": false,
+                "semantic_roles": [
+                  "Patient.id",
+                  "Specimen.id",
+                  "Specimen.identifier"
+                ],
+                "observed_shape": {
+                  "null_ratio": 0.0,
+                  "parseable_integer_ratio": 0.0,
+                  "parseable_decimal_ratio": 0.0,
+                  "parseable_boolean_ratio": 0.0,
+                  "parseable_date_ratio": 0.0,
+                  "parseable_datetime_ratio": 0.0,
+                  "identifier_like": true,
+                  "short_code_like": false,
+                  "long_text_like": false,
+                  "normalized_sample_values": [
+                    "m1",
+                    "m2"
+                  ]
+                },
+                "datatype_candidates": [
+                  {
+                    "family": "string",
+                    "confidence": 0.6,
+                    "reason": "fallback inferred from primitive source type"
+                  }
+                ],
+                "property_matches": [
+                  {
+                    "entity": "Patient",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.48400000000000004,
+                    "reason": "column shape and name are compatible with Patient.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.48400000000000004,
+                    "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "identifier",
+                    "family": "identifier",
+                    "confidence": 0.48400000000000004,
+                    "reason": "column shape and name are compatible with Specimen.identifier (Identifier)"
+                  }
+                ]
+              }
+            ],
+            "clusters": [],
+            "entity_candidates": [
+              {
+                "entity": "Patient",
+                "confidence": 0.7051666666666666,
+                "reason": "table columns cover 1 schema properties for entity `Patient`",
+                "matched_properties": [
+                  "id"
+                ],
+                "evidence": [
+                  "id:0.99"
+                ]
+              },
+              {
+                "entity": "Specimen",
+                "confidence": 0.6470583333333334,
+                "reason": "table columns cover 2 schema properties for entity `Specimen`",
+                "matched_properties": [
+                  "id",
+                  "identifier"
+                ],
+                "evidence": [
+                  "id:0.84",
+                  "identifier:0.84"
+                ]
+              }
+            ],
+            "edge_candidates": [
+              {
+                "rel": "subject_Patient",
+                "from_entity": "Specimen",
+                "to_entity": "Patient",
+                "source_column": "PATIENT_ID",
+                "confidence": 0.6082350000000001,
+                "reason": "column `PATIENT_ID` looks like a `Patient` reference compatible with schema link `subject_Patient`",
+                "evidence": [
+                  "link_tokens=patient,specimen,subject"
+                ]
+              }
+            ],
+            "schema_derived": true
+          },
+          {
+            "source": {
+              "source_id": "samples",
+              "table_id": "primary"
+            },
+            "table_name": "source_samples",
+            "columns": [
+              "SAMPLE_ID",
+              "PATIENT_ID"
+            ],
+            "possible_id_columns": [
+              "SAMPLE_ID",
+              "PATIENT_ID"
+            ],
+            "semantic_suggestions": [
+              {
+                "column": "PATIENT_ID",
+                "suggested_mapping": "Patient.id",
+                "confidence": 0.99,
+                "reason": "column shape and name are compatible with Patient.id (Identifier)"
+              },
+              {
+                "column": "SAMPLE_ID",
+                "suggested_mapping": "Patient.id",
+                "confidence": 0.8365,
+                "reason": "column shape and name are compatible with Patient.id (Identifier)"
+              },
+              {
+                "column": "SAMPLE_ID",
+                "suggested_mapping": "Specimen.id",
+                "confidence": 0.8365,
+                "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+              },
+              {
+                "column": "PATIENT_ID",
+                "suggested_mapping": "Specimen.id",
+                "confidence": 0.8365,
+                "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+              }
+            ],
+            "likely_id_columns": [
+              "SAMPLE_ID",
+              "PATIENT_ID"
+            ],
+            "likely_reference_columns": [
+              "SAMPLE_ID",
+              "PATIENT_ID"
+            ],
+            "column_profiles": [
+              {
+                "column": "SAMPLE_ID",
+                "non_empty_count": 2,
+                "distinct_count": 2,
+                "uniqueness_ratio": 1.0,
+                "inferred_type": "string",
+                "sample_values": [
+                  "s1",
+                  "s2"
+                ],
+                "likely_id": true,
+                "likely_foreign_key": true,
+                "semantic_roles": [
+                  "Patient.id",
+                  "Specimen.id",
+                  "Specimen.identifier"
+                ],
+                "observed_shape": {
+                  "null_ratio": 0.0,
+                  "parseable_integer_ratio": 0.0,
+                  "parseable_decimal_ratio": 0.0,
+                  "parseable_boolean_ratio": 0.0,
+                  "parseable_date_ratio": 0.0,
+                  "parseable_datetime_ratio": 0.0,
+                  "identifier_like": true,
+                  "short_code_like": false,
+                  "long_text_like": false,
+                  "normalized_sample_values": [
+                    "s1",
+                    "s2"
+                  ]
+                },
+                "datatype_candidates": [
+                  {
+                    "family": "identifier",
+                    "confidence": 0.93,
+                    "reason": "high uniqueness and identifier-like token shape"
+                  },
+                  {
+                    "family": "reference",
+                    "confidence": 0.78,
+                    "reason": "column name suggests a row-to-row reference"
+                  }
+                ],
+                "property_matches": [
+                  {
+                    "entity": "Patient",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Patient.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "identifier",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.identifier (Identifier)"
+                  }
+                ]
+              },
+              {
+                "column": "PATIENT_ID",
+                "non_empty_count": 2,
+                "distinct_count": 2,
+                "uniqueness_ratio": 1.0,
+                "inferred_type": "string",
+                "sample_values": [
+                  "p1",
+                  "p2"
+                ],
+                "likely_id": true,
+                "likely_foreign_key": true,
+                "semantic_roles": [
+                  "Patient.id",
+                  "Specimen.id",
+                  "Specimen.identifier"
+                ],
+                "observed_shape": {
+                  "null_ratio": 0.0,
+                  "parseable_integer_ratio": 0.0,
+                  "parseable_decimal_ratio": 0.0,
+                  "parseable_boolean_ratio": 0.0,
+                  "parseable_date_ratio": 0.0,
+                  "parseable_datetime_ratio": 0.0,
+                  "identifier_like": true,
+                  "short_code_like": false,
+                  "long_text_like": false,
+                  "normalized_sample_values": [
+                    "p1",
+                    "p2"
+                  ]
+                },
+                "datatype_candidates": [
+                  {
+                    "family": "identifier",
+                    "confidence": 0.93,
+                    "reason": "high uniqueness and identifier-like token shape"
+                  },
+                  {
+                    "family": "reference",
+                    "confidence": 0.78,
+                    "reason": "column name suggests a row-to-row reference"
+                  }
+                ],
+                "property_matches": [
+                  {
+                    "entity": "Patient",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.99,
+                    "reason": "column shape and name are compatible with Patient.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "id",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.id (Identifier)"
+                  },
+                  {
+                    "entity": "Specimen",
+                    "property": "identifier",
+                    "family": "identifier",
+                    "confidence": 0.8365,
+                    "reason": "column shape and name are compatible with Specimen.identifier (Identifier)"
+                  }
+                ]
+              }
+            ],
+            "clusters": [],
+            "entity_candidates": [
+              {
+                "entity": "Patient",
+                "confidence": 0.7051666666666666,
+                "reason": "table columns cover 1 schema properties for entity `Patient`",
+                "matched_properties": [
+                  "id"
+                ],
+                "evidence": [
+                  "id:0.99"
+                ]
+              },
+              {
+                "entity": "Specimen",
+                "confidence": 0.6470583333333334,
+                "reason": "table columns cover 2 schema properties for entity `Specimen`",
+                "matched_properties": [
+                  "id",
+                  "identifier"
+                ],
+                "evidence": [
+                  "id:0.84",
+                  "identifier:0.84"
+                ]
+              }
+            ],
+            "edge_candidates": [
+              {
+                "rel": "subject_Patient",
+                "from_entity": "Specimen",
+                "to_entity": "Patient",
+                "source_column": "PATIENT_ID",
+                "confidence": 0.6082350000000001,
+                "reason": "column `PATIENT_ID` looks like a `Patient` reference compatible with schema link `subject_Patient`",
+                "evidence": [
+                  "link_tokens=patient,specimen,subject"
+                ]
+              }
+            ],
+            "schema_derived": true
+          }
+        ],
+        "manifest": {
+          "version": 1,
+          "graph": "demo_graph",
+          "display_name": "demo graph",
+          "sources": {
+            "gs_0000_patients_primary": {
+              "source": "patients",
+              "path": null,
+              "format": "tsv"
+            },
+            "gs_0001_samples_primary": {
+              "source": "samples",
+              "path": null,
+              "format": "tsv"
+            }
+          },
+          "vertices": [
+            {
+              "source": "gs_0000_patients_primary",
+              "label": "Patient",
+              "id": {
+                "concat": [
+                  "Patient/",
+                  {
+                    "column": "PATIENT_ID"
+                  }
+                ]
+              },
+              "where": null,
+              "columns": {},
+              "props": "none",
+              "prop_types": {}
+            },
+            {
+              "source": "gs_0001_samples_primary",
+              "label": "Specimen",
+              "id": {
+                "concat": [
+                  "Specimen/",
+                  {
+                    "column": "SAMPLE_ID"
+                  }
+                ]
+              },
+              "where": null,
+              "columns": {
+                "identifier": {
+                  "column": "SAMPLE_ID"
+                }
+              },
+              "props": "none",
+              "prop_types": {}
+            }
+          ],
+          "edges": [
+            {
+              "source": "gs_0001_samples_primary",
+              "label": "subject_Patient",
+              "from_label": "Specimen",
+              "to_label": "Patient",
+              "from": {
+                "concat": [
+                  "Specimen/",
+                  {
+                    "column": "SAMPLE_ID"
+                  }
+                ]
+              },
+              "to": {
+                "concat": [
+                  "Patient/",
+                  {
+                    "column": "PATIENT_ID"
+                  }
+                ]
+              },
+              "id": null,
+              "where": null,
+              "columns": {},
+              "props": "none",
+              "prop_types": {}
+            }
+          ],
+          "validation": {
+            "duplicate_vertex_ids": "error",
+            "duplicate_edge_ids": "error",
+            "missing_edge_endpoints": "error",
+            "empty_ids": "error",
+            "type_coercion": "strict",
+            "duplicate_alias_keys": "error",
+            "unresolved_references": "warn",
+            "ambiguous_references": "error"
+          },
+          "identity": {},
+          "references": [],
+          "metadata": {}
+        },
+        "mapping_validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "policy": {
+            "duplicate_vertex_ids": "error",
+            "duplicate_edge_ids": "error",
+            "missing_edge_endpoints": "error",
+            "empty_ids": "error",
+            "type_coercion": "strict",
+            "duplicate_alias_keys": "error",
+            "unresolved_references": "warn",
+            "ambiguous_references": "error"
+          },
+          "metrics": {
+            "input_rows": {
+              "edges[0]": 2,
+              "vertices[0]": 2,
+              "vertices[1]": 2
+            },
+            "emitted_rows": {
+              "edges[0]": 2,
+              "vertices[0]": 2,
+              "vertices[1]": 2
+            },
+            "filtered_empty_ids": 0,
+            "duplicate_vertex_ids": 0,
+            "duplicate_edge_ids": 0,
+            "duplicate_alias_keys": {},
+            "unresolved_edge_endpoints": 0,
+            "unresolved_edge_endpoint_counts": {},
+            "unresolved_references": {},
+            "ambiguous_references": {},
+            "coercion_failures": {},
+            "provenance_missing": 0,
+            "missing_required_fields": {}
+          },
+          "plan_preview": {
+            "graph": "demo_graph",
+            "vertex_table": "vertices_demo_graph",
+            "edge_table": "edges_demo_graph",
+            "vertex_columns": [
+              "id",
+              "label",
+              "source_id",
+              "source_row",
+              "payload_codec",
+              "payload_bin",
+              "payload_json_bin",
+              "identifier"
+            ],
+            "edge_columns": [
+              "id",
+              "from_id",
+              "to_id",
+              "label",
+              "source_id",
+              "source_row",
+              "payload_codec",
+              "payload_bin",
+              "payload_json_bin"
+            ],
+            "node_views": [
+              {
+                "mapping_index": 0,
+                "mapping_path": "vertices[0]",
+                "source_alias": "gs_0000_patients_primary",
+                "source_id": "patients",
+                "source_table_name": "source_patients",
+                "source_table_ref": {
+                  "source_id": "patients",
+                  "table_id": "primary"
+                },
+                "view_name": "graph_demo_graph_node_0000_patient",
+                "label": "Patient",
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"Patient\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"patients\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_patients\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"MRN\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"id\", data_type: Utf8, nullable: true }, Field { name: \"label\", data_type: Utf8 }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "id",
+                  "label",
+                  "source_id",
+                  "source_row"
+                ]
+              },
+              {
+                "mapping_index": 1,
+                "mapping_path": "vertices[1]",
+                "source_alias": "gs_0001_samples_primary",
+                "source_id": "samples",
+                "source_table_name": "source_samples",
+                "source_table_ref": {
+                  "source_id": "samples",
+                  "table_id": "primary"
+                },
+                "view_name": "graph_demo_graph_node_0001_specimen",
+                "label": "Specimen",
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"Specimen\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"samples\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), relation: None, name: \"identifier\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_samples\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"SAMPLE_ID\", data_type: Utf8, nullable: true }, Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"id\", data_type: Utf8, nullable: true }, Field { name: \"label\", data_type: Utf8 }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }, Field { name: \"identifier\", data_type: Utf8, nullable: true }], metadata: {} }, field_qualifiers: [None, None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "id",
+                  "label",
+                  "source_id",
+                  "source_row",
+                  "identifier"
+                ]
+              }
+            ],
+            "edge_views": [
+              {
+                "mapping_index": 0,
+                "mapping_path": "edges[0]",
+                "source_alias": "gs_0001_samples_primary",
+                "source_id": "samples",
+                "source_table_name": "source_samples",
+                "source_table_ref": {
+                  "source_id": "samples",
+                  "table_id": "primary"
+                },
+                "view_name": "graph_demo_graph_edge_0000_subject_patient",
+                "label": "subject_Patient",
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"edge/subject_Patient\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"__source_row\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"id\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"from_id\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"to_id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"subject_Patient\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"samples\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), op: And, right: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_samples\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"SAMPLE_ID\", data_type: Utf8, nullable: true }, Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"id\", data_type: Utf8, nullable: true }, Field { name: \"from_id\", data_type: Utf8, nullable: true }, Field { name: \"to_id\", data_type: Utf8, nullable: true }, Field { name: \"label\", data_type: Utf8 }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [None, None, None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "id",
+                  "from_id",
+                  "to_id",
+                  "label",
+                  "source_id",
+                  "source_row"
+                ]
+              }
+            ],
+            "identity_views": [
+              {
+                "label": "Patient",
+                "view_name": "graph_demo_graph_identity_patient",
+                "alias_names": [
+                  "canonical"
+                ],
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: Literal(Utf8(\"Patient\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"canonical_id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"canonical\"), None), relation: None, name: \"alias_name\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"alias_key\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"patients\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"\"), None), relation: None, name: \"transform_id\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Patient/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_patients\" }), name: \"PATIENT_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_patients\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"MRN\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" }), Some(Bare { table: \"source_patients\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"label\", data_type: Utf8 }, Field { name: \"canonical_id\", data_type: Utf8, nullable: true }, Field { name: \"alias_name\", data_type: Utf8 }, Field { name: \"alias_key\", data_type: Utf8, nullable: true }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }, Field { name: \"transform_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [None, None, None, None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "label",
+                  "canonical_id",
+                  "alias_name",
+                  "alias_key",
+                  "source_id",
+                  "source_row",
+                  "transform_id"
+                ]
+              },
+              {
+                "label": "Specimen",
+                "view_name": "graph_demo_graph_identity_specimen",
+                "alias_names": [
+                  "canonical"
+                ],
+                "explain": "Projection(Projection { expr: [Alias(Alias { expr: Literal(Utf8(\"Specimen\"), None), relation: None, name: \"label\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"canonical_id\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"canonical\"), None), relation: None, name: \"alias_name\", metadata: None }), Alias(Alias { expr: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), relation: None, name: \"alias_key\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"samples\"), None), relation: None, name: \"source_id\", metadata: None }), Alias(Alias { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"__source_row\" }), relation: None, name: \"source_row\", metadata: None }), Alias(Alias { expr: Literal(Utf8(\"\"), None), relation: None, name: \"transform_id\", metadata: None })], input: Filter(Filter { predicate: BinaryExpr(BinaryExpr { left: IsNotNull(ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] })), op: And, right: BinaryExpr(BinaryExpr { left: ScalarFunction(ScalarFunction { func: ScalarUDF { inner: ConcatFunc { signature: Signature { type_signature: Variadic([Utf8View, Utf8, LargeUtf8]), volatility: Immutable, parameter_names: None } } }, args: [ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Literal(Utf8(\"Specimen/\"), None), data_type: Utf8 }), Literal(Utf8(\"\"), None)] }), ScalarFunction(ScalarFunction { func: ScalarUDF { inner: CoalesceFunc { signature: Signature { type_signature: UserDefined, volatility: Immutable, parameter_names: None } } }, args: [Cast(Cast { expr: Column(Column { relation: Some(Bare { table: \"source_samples\" }), name: \"SAMPLE_ID\" }), data_type: Utf8 }), Literal(Utf8(\"\"), None)] })] }), op: NotEq, right: Literal(Utf8(\"\"), None) }) }), input: TableScan(TableScan { table_name: Bare { table: \"source_samples\" }, source: \"...\", projection: None, projected_schema: DFSchema { inner: Schema { fields: [Field { name: \"SAMPLE_ID\", data_type: Utf8, nullable: true }, Field { name: \"PATIENT_ID\", data_type: Utf8, nullable: true }, Field { name: \"__source_row\", data_type: Utf8 }, Field { name: \"__source_table\", data_type: Utf8 }, Field { name: \"__source_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" }), Some(Bare { table: \"source_samples\" })], functional_dependencies: FunctionalDependencies { deps: [] } }, filters: [], fetch: None, .. }) }), schema: DFSchema { inner: Schema { fields: [Field { name: \"label\", data_type: Utf8 }, Field { name: \"canonical_id\", data_type: Utf8, nullable: true }, Field { name: \"alias_name\", data_type: Utf8 }, Field { name: \"alias_key\", data_type: Utf8, nullable: true }, Field { name: \"source_id\", data_type: Utf8 }, Field { name: \"source_row\", data_type: Utf8 }, Field { name: \"transform_id\", data_type: Utf8 }], metadata: {} }, field_qualifiers: [None, None, None, None, None, None, None], functional_dependencies: FunctionalDependencies { deps: [] } } })",
+                "projected_columns": [
+                  "label",
+                  "canonical_id",
+                  "alias_name",
+                  "alias_key",
+                  "source_id",
+                  "source_row",
+                  "transform_id"
+                ]
+              }
+            ],
+            "reference_views": [],
+            "source_dependencies": [
+              "patients",
+              "samples"
+            ],
+            "warnings": []
+          }
+        }
+      },
+      "registered_mapping_graph": "demo_graph",
+      "created_unix_seconds": 1778795738,
+      "updated_unix_seconds": 1778795738
+    }
+  ]
+}

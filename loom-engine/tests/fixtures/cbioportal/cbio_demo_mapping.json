@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "graph": "cbio_public_raw",
+  "display_name": "cBioPortal multimodal research graph",
+  "validation": {
+    "duplicate_vertex_ids": "first",
+    "duplicate_edge_ids": "error",
+    "missing_edge_endpoints": "error",
+    "empty_ids": "error",
+    "type_coercion": "strict"
+  },
+  "sources": {
+    "patients": { "source": "patients" },
+    "samples": { "source": "samples" },
+    "genes": { "source": "genes" },
+    "mutations": { "source": "mutations" },
+    "cna": { "source": "cna" },
+    "expression": { "source": "expression" }
+  },
+  "vertices": [
+    {
+      "source": "patients",
+      "label": "Patient",
+      "id": { "concat": ["Patient/", { "column": "patient_id" }] },
+      "props": "none"
+    },
+    {
+      "source": "samples",
+      "label": "Specimen",
+      "id": { "concat": ["Specimen/", { "column": "sample_id" }] },
+      "columns": {
+        "identifier": { "column": "sample_id" },
+        "type": { "column": "sample_type" },
+        "status": { "literal": "available" }
+      },
+      "props": "none"
+    },
+    {
+      "source": "genes",
+      "label": "Gene",
+      "id": { "concat": ["Gene/", { "column": "gene_symbol" }] },
+      "columns": {
+        "symbol": { "column": "gene_symbol" },
+        "submitterId": { "column": "submitter_id" },
+        "projectId": { "column": "project_id" }
+      },
+      "props": "none"
+    },
+    {
+      "source": "mutations",
+      "label": "Observation",
+      "id": { "concat": ["Observation/", { "column": "observation_id" }] },
+      "columns": {
+        "code": { "column": "code" },
+        "valueString": { "column": "value_string" },
+        "status": { "column": "status" }
+      },
+      "props": "none"
+    },
+    {
+      "source": "cna",
+      "label": "Observation",
+      "id": { "concat": ["Observation/", { "column": "observation_id" }] },
+      "columns": {
+        "code": { "column": "code" },
+        "valueString": { "column": "value_string" },
+        "status": { "column": "status" }
+      },
+      "props": "none"
+    },
+    {
+      "source": "expression",
+      "label": "Observation",
+      "id": { "concat": ["Observation/", { "column": "observation_id" }] },
+      "columns": {
+        "code": { "column": "code" },
+        "valueString": { "column": "value_string" },
+        "status": { "column": "status" }
+      },
+      "props": "none"
+    }
+  ],
+  "edges": [
+    {
+      "source": "samples",
+      "label": "subject_Patient",
+      "from_label": "Specimen",
+      "to_label": "Patient",
+      "from": { "concat": ["Specimen/", { "column": "sample_id" }] },
+      "to": { "concat": ["Patient/", { "column": "patient_id" }] }
+    },
+    {
+      "source": "mutations",
+      "label": "specimen_Specimen",
+      "from_label": "Observation",
+      "to_label": "Specimen",
+      "from": { "concat": ["Observation/", { "column": "observation_id" }] },
+      "to": { "concat": ["Specimen/", { "column": "sample_id" }] }
+    },
+    {
+      "source": "mutations",
+      "label": "focus",
+      "from_label": "Observation",
+      "to_label": "Gene",
+      "from": { "concat": ["Observation/", { "column": "observation_id" }] },
+      "to": { "concat": ["Gene/", { "column": "gene_symbol" }] }
+    },
+    {
+      "source": "cna",
+      "label": "specimen_Specimen",
+      "from_label": "Observation",
+      "to_label": "Specimen",
+      "from": { "concat": ["Observation/", { "column": "observation_id" }] },
+      "to": { "concat": ["Specimen/", { "column": "sample_id" }] }
+    },
+    {
+      "source": "cna",
+      "label": "focus",
+      "from_label": "Observation",
+      "to_label": "Gene",
+      "from": { "concat": ["Observation/", { "column": "observation_id" }] },
+      "to": { "concat": ["Gene/", { "column": "gene_symbol" }] }
+    },
+    {
+      "source": "expression",
+      "label": "specimen_Specimen",
+      "from_label": "Observation",
+      "to_label": "Specimen",
+      "from": { "concat": ["Observation/", { "column": "observation_id" }] },
+      "to": { "concat": ["Specimen/", { "column": "sample_id" }] }
+    },
+    {
+      "source": "expression",
+      "label": "focus",
+      "from_label": "Observation",
+      "to_label": "Gene",
+      "from": { "concat": ["Observation/", { "column": "observation_id" }] },
+      "to": { "concat": ["Gene/", { "column": "gene_symbol" }] }
+    }
+  ]
+}

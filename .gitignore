@@ -1,0 +1,10 @@
+target/
+
+.DS_Store
+**/.DS_Store
+
+*.log
+.env
+.env.*
+
+loom-server/data/

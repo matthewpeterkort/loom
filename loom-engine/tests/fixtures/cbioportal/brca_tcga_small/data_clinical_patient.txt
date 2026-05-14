@@ -1,0 +1,7 @@
+#Patient Identifier	Overall Survival Status	Overall Survival (Months)	Custom Risk Group
+#Patient identifier	Overall survival status	Overall survival in months since diagnosis	Custom study-specific field
+#STRING	STRING	NUMBER	STRING
+#1	1	1	1
+PATIENT_ID	OS_STATUS	OS_MONTHS	CUSTOM_RISK_GROUP
+TCGA-A1-A0SB	0:LIVING	42.0	LOW
+TCGA-A2-A04P	1:DECEASED	17.9	HIGH

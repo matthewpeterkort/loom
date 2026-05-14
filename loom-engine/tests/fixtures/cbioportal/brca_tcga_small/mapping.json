@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "graph": "cbio",
+  "display_name": "cBioPortal BRCA TCGA FHIR-lite",
+  "validation": {
+    "duplicate_vertex_ids": "first",
+    "duplicate_edge_ids": "error",
+    "missing_edge_endpoints": "error",
+    "empty_ids": "error",
+    "type_coercion": "strict"
+  },
+  "sources": {
+    "patients": {
+      "source": "patients"
+    },
+    "samples": {
+      "source": "samples"
+    },
+    "mutations": {
+      "source": "mutations"
+    },
+    "sequenced_cases": {
+      "source": "sequenced_cases"
+    }
+  },
+  "vertices": [
+    {
+      "source": "patients",
+      "label": "Patient",
+      "id": { "concat": ["Patient/", { "column": "PATIENT_ID" }] },
+      "columns": {
+        "patient_id": { "column": "PATIENT_ID" }
+      },
+      "props": { "except": ["PATIENT_ID"] }
+    },
+    {
+      "source": "samples",
+      "label": "Specimen",
+      "id": { "concat": ["Specimen/", { "column": "SAMPLE_ID" }] },
+      "columns": {
+        "patient_id": { "column": "PATIENT_ID" },
+        "sample_id": { "column": "SAMPLE_ID" }
+      },
+      "props": { "except": ["PATIENT_ID", "SAMPLE_ID"] }
+    },
+    {
+      "source": "mutations",
+      "label": "Gene",
+      "id": { "concat": ["Gene/", { "column": "Hugo_Symbol" }] },
+      "columns": {
+        "gene_symbol": { "column": "Hugo_Symbol" }
+      },
+      "props": "none"
+    },
+    {
+      "source": "mutations",
+      "label": "Variant",
+      "id": {
+        "concat": [
+          "Variant/",
+          { "column": "Chromosome" },
+          ":",
+          { "column": "Start_Position" },
+          ":",
+          { "column": "End_Position" },
+          ":",
+          { "column": "Reference_Allele" },
+          ">",
+          { "coalesce": [
+            { "column": "Tumor_Seq_Allele2" },
+            { "column": "Tumor_Seq_Allele1" }
+          ] }
+        ]
+      },
+      "columns": {
+        "sample_id": { "column": "Tumor_Sample_Barcode" },
+        "gene_symbol": { "column": "Hugo_Symbol" },
+        "variant_id": {
+          "concat": [
+            { "column": "Chromosome" },
+            ":",
+            { "column": "Start_Position" },
+            ":",
+            { "column": "End_Position" },
+            ":",
+            { "column": "Reference_Allele" },
+            ">",
+            { "coalesce": [
+              { "column": "Tumor_Seq_Allele2" },
+              { "column": "Tumor_Seq_Allele1" }
+            ] }
+          ]
+        },
+        "chromosome": { "column": "Chromosome" },
+        "start_position": { "column": "Start_Position" },
+        "end_position": { "column": "End_Position" },
+        "reference_allele": { "column": "Reference_Allele" },
+        "tumor_seq_allele2": {
+          "coalesce": [
+            { "column": "Tumor_Seq_Allele2" },
+            { "column": "Tumor_Seq_Allele1" }
+          ]
+        }
+      },
+      "props": {
+        "except": [
+          "Tumor_Sample_Barcode",
+          "Hugo_Symbol",
+          "Chromosome",
+          "Start_Position",
+          "End_Position",
+          "Reference_Allele",
+          "Tumor_Seq_Allele1",
+          "Tumor_Seq_Allele2"
+        ]
+      }
+    },
+    {
+      "source": "mutations",
+      "label": "GenomicFinding",
+      "id": {
+        "concat": [
+          "GenomicFinding/",
+          { "column": "Tumor_Sample_Barcode" },
+          "/",
+          { "column": "Chromosome" },
+          ":",
+          { "column": "Start_Position" },
+          ":",
+          { "column": "End_Position" },
+          ":",
+          { "column": "Reference_Allele" },
+          ">",
+          { "coalesce": [
+            { "column": "Tumor_Seq_Allele2" },
+            { "column": "Tumor_Seq_Allele1" }
+          ] },
+          "/",
+          { "row_number": true }
+        ]
+      },
+      "columns": {
+        "sample_id": { "column": "Tumor_Sample_Barcode" },
+        "gene_symbol": { "column": "Hugo_Symbol" },
+        "variant_id": {
+          "concat": [
+            { "column": "Chromosome" },
+            ":",
+            { "column": "Start_Position" },
+            ":",
+            { "column": "End_Position" },
+            ":",
+            { "column": "Reference_Allele" },
+            ">",
+            { "coalesce": [
+              { "column": "Tumor_Seq_Allele2" },
+              { "column": "Tumor_Seq_Allele1" }
+            ] }
+          ]
+        },
+        "chromosome": { "column": "Chromosome" },
+        "start_position": { "column": "Start_Position" },
+        "end_position": { "column": "End_Position" },
+        "reference_allele": { "column": "Reference_Allele" },
+        "tumor_seq_allele2": {
+          "coalesce": [
+            { "column": "Tumor_Seq_Allele2" },
+            { "column": "Tumor_Seq_Allele1" }
+          ]
+        }
+      },
+      "props": "all"
+    },
+    {
+      "source": "sequenced_cases",
+      "label": "CaseList",
+      "id": { "concat": ["CaseList/", { "column": "stable_id" }] },
+      "columns": {
+        "case_list_id": { "column": "stable_id" },
+        "case_list_name": { "column": "case_list_name" }
+      },
+      "props": { "only": ["stable_id", "case_list_name"] }
+    }
+  ],
+  "edges": [
+    {
+      "source": "samples",
+      "label": "HAS_SPECIMEN",
+      "from_label": "Patient",
+      "to_label": "Specimen",
+      "id": {
+        "concat": [
+          "edge/",
+          { "column": "PATIENT_ID" },
+          "/HAS_SPECIMEN/",
+          { "column": "SAMPLE_ID" }
+        ]
+      },
+      "from": { "concat": ["Patient/", { "column": "PATIENT_ID" }] },
+      "to": { "concat": ["Specimen/", { "column": "SAMPLE_ID" }] }
+    },
+    {
+      "source": "mutations",
+      "label": "HAS_OBSERVATION",
+      "from_label": "Specimen",
+      "to_label": "GenomicFinding",
+      "id": {
+        "concat": [
+          "edge/",
+          { "column": "Tumor_Sample_Barcode" },
+          "/HAS_OBSERVATION/",
+          { "row_number": true }
+        ]
+      },
+      "from": { "concat": ["Specimen/", { "column": "Tumor_Sample_Barcode" }] },
+      "to": {
+        "concat": [
+          "GenomicFinding/",
+          { "column": "Tumor_Sample_Barcode" },
+          "/",
+          { "column": "Chromosome" },
+          ":",
+          { "column": "Start_Position" },
+          ":",
+          { "column": "End_Position" },
+          ":",
+          { "column": "Reference_Allele" },
+          ">",
+          { "coalesce": [
+            { "column": "Tumor_Seq_Allele2" },
+            { "column": "Tumor_Seq_Allele1" }
+          ] },
+          "/",
+          { "row_number": true }
+        ]
+      }
+    },
+    {
+      "source": "mutations",
+      "label": "OBSERVES_VARIANT",
+      "from_label": "GenomicFinding",
+      "to_label": "Variant",
+      "id": {
+        "concat": [
+          "edge/OBSERVES_VARIANT/",
+          { "column": "Tumor_Sample_Barcode" },
+          "/",
+          { "row_number": true }
+        ]
+      },
+      "from": {
+        "concat": [
+          "GenomicFinding/",
+          { "column": "Tumor_Sample_Barcode" },
+          "/",
+          { "column": "Chromosome" },
+          ":",
+          { "column": "Start_Position" },
+          ":",
+          { "column": "End_Position" },
+          ":",
+          { "column": "Reference_Allele" },
+          ">",
+          { "coalesce": [
+            { "column": "Tumor_Seq_Allele2" },
+            { "column": "Tumor_Seq_Allele1" }
+          ] },
+          "/",
+          { "row_number": true }
+        ]
+      },
+      "to": {
+        "concat": [
+          "Variant/",
+          { "column": "Chromosome" },
+          ":",
+          { "column": "Start_Position" },
+          ":",
+          { "column": "End_Position" },
+          ":",
+          { "column": "Reference_Allele" },
+          ">",
+          { "coalesce": [
+            { "column": "Tumor_Seq_Allele2" },
+            { "column": "Tumor_Seq_Allele1" }
+          ] }
+        ]
+      }
+    },
+    {
+      "source": "mutations",
+      "label": "IN_GENE",
+      "from_label": "Variant",
+      "to_label": "Gene",
+      "id": {
+        "concat": [
+          "edge/IN_GENE/",
+          { "column": "Chromosome" },
+          ":",
+          { "column": "Start_Position" },
+          ":",
+          { "column": "End_Position" },
+          ":",
+          { "column": "Reference_Allele" },
+          ">",
+          { "coalesce": [
+            { "column": "Tumor_Seq_Allele2" },
+            { "column": "Tumor_Seq_Allele1" }
+          ] },
+          "/",
+          { "column": "Hugo_Symbol" }
+        ]
+      },
+      "from": {
+        "concat": [
+          "Variant/",
+          { "column": "Chromosome" },
+          ":",
+          { "column": "Start_Position" },
+          ":",
+          { "column": "End_Position" },
+          ":",
+          { "column": "Reference_Allele" },
+          ">",
+          { "coalesce": [
+            { "column": "Tumor_Seq_Allele2" },
+            { "column": "Tumor_Seq_Allele1" }
+          ] }
+        ]
+      },
+      "to": { "concat": ["Gene/", { "column": "Hugo_Symbol" }] }
+    },
+    {
+      "source": "sequenced_cases",
+      "label": "HAS_CASE",
+      "from_label": "CaseList",
+      "to_label": "Specimen",
+      "id": {
+        "concat": [
+          "edge/",
+          { "column": "stable_id" },
+          "/HAS_CASE/",
+          { "column": "sample_id" }
+        ]
+      },
+      "from": { "concat": ["CaseList/", { "column": "stable_id" }] },
+      "to": { "concat": ["Specimen/", { "column": "sample_id" }] }
+    }
+  ]
+}
